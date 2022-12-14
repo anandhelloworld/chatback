@@ -5,27 +5,26 @@
 
 const express = require("express");
 const app = express();
-const http = require("http");
+const https = require("https");
 const cors = require("cors");
 const { Server } = require("socket.io");
 app.use(cors());
 
-const server = http.createServer(app);
+const server = https.createServer(app);
 const port= process.env.port||3000;
 const io = new Server(server, {
   cors: {
     origin: "https://chatfend.onrender.com",
-    methods: ["GET", "POST","PUT"],
+    methods: ["GET", "POST"],
   },
 });
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
- 
   socket.on("join_room", (data) => {
     socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room: ${data}`);4
+    console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
 
   socket.on("send_message", (data) => {
