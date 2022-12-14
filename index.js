@@ -1,3 +1,10 @@
+// const express = require('express');
+// const app = express();
+// const port = process.env.PORT || 3000;
+
+// app.get('/anand', (req, res) => res.send('Hello ANAND!'));
+
+// app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
 
 //G3ZWVwdFNMNbZjC2
@@ -5,12 +12,12 @@
 
 const express = require("express");
 const app = express();
-const https = require("https");
+const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
 app.use(cors());
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 const port= process.env.port||3000;
 const io = new Server(server, {
   cors: {
@@ -37,5 +44,5 @@ io.on("connection", (socket) => {
 });
 app.get('/', (req, res) => res.send('Hello ANAND!'));
 server.listen(port, () => {
-  console.log(`Example app listening at :${port}`)
+  console.log(`Example app listening at http://localhost:${port}`)
 });
